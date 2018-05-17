@@ -10,6 +10,11 @@ import (
 	s "strings"
 )
 
+const usageStr = `Usage:
+	%s /path/to/file.json
+	echo '{"key": "value"}' | %s
+`
+
 func fileExists(f string) bool {
 	if _, err := os.Stat(flag.Arg(0)); err == nil {
 		return true
@@ -58,8 +63,7 @@ func main() {
 	var f interface{}
 
 	flag.Usage = func() {
-		fmt.Printf("Usage:\n\t%s /path/to/file.json\n", os.Args[0])
-		fmt.Printf("\tcat /path/to/file.json | %s\n", os.Args[0])
+		fmt.Printf(usageStr, os.Args[0], os.Args[0])
 		flag.PrintDefaults()
 	}
 
