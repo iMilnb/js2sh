@@ -1,6 +1,10 @@
 ## JSON to shell variable converter
 
+`js2sh` is a simple tool to convert _JSON_ data to shell variables.
+
 ### Usage
+
+Piping content to `js2sh`:
 
 ```
 $ echo '{"foo": [1, 2, 3, 8.923878], "bar": {"baz": {"a": "b"}}}' | js2sh
@@ -11,6 +15,7 @@ FOO_3="8.923878"
 BAR_BAZ_A="b"
 ```
 
+Passing a _JSON_ file
 ```
 $ js2sh /path/to/foo.json
 [...]
@@ -28,4 +33,21 @@ RESOURCES_VPC_ACTIONS_CREATENETWORKACL_RESOURCE_IDENTIFIERS_0_TARGET="Id"
 RESOURCES_VPC_ACTIONS_CREATENETWORKACL_RESOURCE_IDENTIFIERS_0_SOURCE="response"
 RESOURCES_VPC_ACTIONS_CREATENETWORKACL_RESOURCE_IDENTIFIERS_0_PATH="NetworkAcl.NetworkAclId"
 […]
+```
+
+Do not upper-case variables :
+
+```
+$ js2sh -n example.json
+glossary_title="example glossary"
+glossary_GlossDiv_title="S"
+glossary_GlossDiv_GlossList_GlossEntry_Abbrev="ISO 8879:1986"
+glossary_GlossDiv_GlossList_GlossEntry_GlossDef_GlossSeeAlso_0="GML"
+glossary_GlossDiv_GlossList_GlossEntry_GlossDef_GlossSeeAlso_1="XML"
+glossary_GlossDiv_GlossList_GlossEntry_GlossDef_para="A meta-markup language, used to create markup languages such as DocBook."
+glossary_GlossDiv_GlossList_GlossEntry_GlossSee="markup"
+glossary_GlossDiv_GlossList_GlossEntry_ID="SGML"
+glossary_GlossDiv_GlossList_GlossEntry_SortAs="SGML"
+glossary_GlossDiv_GlossList_GlossEntry_GlossTerm="Standard Generalized Markup Language"
+glossary_GlossDiv_GlossList_GlossEntry_Acronym="SGML"
 ```
