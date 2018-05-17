@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"reflect"
 	"strconv"
 	s "strings"
 )
@@ -33,23 +32,21 @@ func numFmt(num float64) string {
 }
 
 func varType(prev string, v interface{}) {
-	t := reflect.ValueOf(v)
 
-	switch t.Kind() {
-	case reflect.Map:
-		for _, k := range t.MapKeys() {
-			i := k.Interface().(string)
-			varType(hasPrev(prev)+i, v.(map[string]interface{})[i])
+	switch v.(type) {
+	case map[string]interface{}:
+		for key, val := range v.(map[string]interface{}) {
+			varType(hasPrev(prev)+key, val)
 		}
-	case reflect.Slice:
+	case []interface{}:
 		for i, v := range v.([]interface{}) {
 			varType(hasPrev(prev)+strconv.Itoa(i), v)
 		}
-	case reflect.Float64:
+	case float64:
 		num := v.(float64)
 		fmtstr := "%s=\"" + numFmt(num) + "\"\n"
 		fmt.Printf(fmtstr, s.ToUpper(prev), num)
-	case reflect.String:
+	case string:
 		fmt.Printf("%s=\"%s\"\n", s.ToUpper(prev), v.(string))
 	}
 }
@@ -59,6 +56,12 @@ func main() {
 	var data []byte
 	var err error
 	var f interface{}
+
+	flag.Usage = func() {
+		fmt.Printf("Usage:\n\t%s /path/to/file.json\n", os.Args[0])
+		fmt.Printf("\tcat /path/to/file.json | %s\n", os.Args[0])
+		flag.PrintDefaults()
+	}
 
 	flag.Parse()
 
