@@ -10,10 +10,15 @@ import (
 	s "strings"
 )
 
-const usageStr = `Usage:
+const (
+	usageStr = `Usage:
 	%s /path/to/file.json
 	echo '{"key": "value"}' | %s
 `
+	noupStr = "don't upper-case variables names"
+)
+
+var noup *bool = flag.Bool("n", false, noupStr)
 
 func fileExists(f string) bool {
 	if _, err := os.Stat(flag.Arg(0)); err == nil {
@@ -36,6 +41,13 @@ func numFmt(num float64) string {
 	return "%f"
 }
 
+func doUp(str string) string {
+	if *noup == false {
+		return s.ToUpper(str)
+	}
+	return str
+}
+
 func varType(prev string, v interface{}) {
 
 	switch v.(type) {
@@ -50,9 +62,9 @@ func varType(prev string, v interface{}) {
 	case float64:
 		num := v.(float64)
 		fmtstr := "%s=\"" + numFmt(num) + "\"\n"
-		fmt.Printf(fmtstr, s.ToUpper(prev), num)
+		fmt.Printf(fmtstr, doUp(prev), num)
 	case string:
-		fmt.Printf("%s=\"%s\"\n", s.ToUpper(prev), v.(string))
+		fmt.Printf("%s=\"%s\"\n", doUp(prev), v.(string))
 	}
 }
 
