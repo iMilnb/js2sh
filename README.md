@@ -58,3 +58,14 @@ $ js2sh -f TITLE example.json
 GLOSSARY_TITLE="example glossary"
 GLOSSARY_GLOSSDIV_TITLE="S"
 ```
+
+Modify default separator
+
+```
+$ js2sh -s @@ example.json
+GLOSSARY@@TITLE="example glossary"
+GLOSSARY@@GLOSSDIV@@GLOSSLIST@@GLOSSENTRY@@GLOSSTERM="Standard Generalized Markup Language"
+GLOSSARY@@GLOSSDIV@@GLOSSLIST@@GLOSSENTRY@@ACRONYM="SGML"
+GLOSSARY@@GLOSSDIV@@GLOSSLIST@@GLOSSENTRY@@ABBREV="ISO 8879:1986"
+GLOSSARY@@GLOSSDIV@@GLOSSLIST@@GLOSSENTRY@@GLOSSDEF@@PARA="A meta-markup language, used to create markup languages such as DocBook."
+```
