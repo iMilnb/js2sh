@@ -15,10 +15,12 @@ const (
 	%s /path/to/file.json
 	echo '{"key": "value"}' | %s
 `
-	noupStr = "don't upper-case variables names"
+	noupUsage   = "don't upper-case variables names"
+	filterUsage = "show only entries matching this filter"
 )
 
-var noup *bool = flag.Bool("n", false, noupStr)
+var noup *bool = flag.Bool("n", false, noupUsage)
+var filter *string = flag.String("f", "", filterUsage)
 
 func fileExists(f string) bool {
 	if _, err := os.Stat(flag.Arg(0)); err == nil {
@@ -48,6 +50,12 @@ func doUp(str string) string {
 	return str
 }
 
+func filterOut(str string) {
+	if *filter == "" || s.Contains(str, *filter) {
+		fmt.Printf(str)
+	}
+}
+
 func varType(prev string, v interface{}) {
 
 	switch v.(type) {
@@ -62,9 +70,9 @@ func varType(prev string, v interface{}) {
 	case float64:
 		num := v.(float64)
 		fmtstr := "%s=\"" + numFmt(num) + "\"\n"
-		fmt.Printf(fmtstr, doUp(prev), num)
+		filterOut(fmt.Sprintf(fmtstr, doUp(prev), num))
 	case string:
-		fmt.Printf("%s=\"%s\"\n", doUp(prev), v.(string))
+		filterOut(fmt.Sprintf("%s=\"%s\"\n", doUp(prev), v.(string)))
 	}
 }
 
