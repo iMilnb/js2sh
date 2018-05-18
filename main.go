@@ -17,10 +17,12 @@ const (
 `
 	noupUsage   = "don't upper-case variables names"
 	filterUsage = "show only entries matching this filter"
+	sepUsage    = "key separator"
 )
 
 var noup *bool = flag.Bool("n", false, noupUsage)
 var filter *string = flag.String("f", "", filterUsage)
+var separator *string = flag.String("s", "_", sepUsage)
 
 func fileExists(f string) bool {
 	if _, err := os.Stat(flag.Arg(0)); err == nil {
@@ -31,7 +33,7 @@ func fileExists(f string) bool {
 
 func hasPrev(prev string) string {
 	if prev != "" {
-		prev += "_"
+		prev += *separator
 	}
 	return prev
 }
