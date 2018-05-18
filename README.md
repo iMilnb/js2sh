@@ -4,7 +4,7 @@
 
 ### Usage
 
-Piping content to `js2sh`:
+Piping content to `js2sh`
 
 ```
 $ echo '{"foo": [1, 2, 3, 8.923878], "bar": {"baz": {"a": "b"}}}' | js2sh
@@ -35,7 +35,7 @@ RESOURCES_VPC_ACTIONS_CREATENETWORKACL_RESOURCE_IDENTIFIERS_0_PATH="NetworkAcl.N
 […]
 ```
 
-Do not upper-case variables :
+Do not upper-case variables
 
 ```
 $ js2sh -n example.json
@@ -50,4 +50,11 @@ glossary_GlossDiv_GlossList_GlossEntry_ID="SGML"
 glossary_GlossDiv_GlossList_GlossEntry_SortAs="SGML"
 glossary_GlossDiv_GlossList_GlossEntry_GlossTerm="Standard Generalized Markup Language"
 glossary_GlossDiv_GlossList_GlossEntry_Acronym="SGML"
+```
+
+Filter matching values
+```
+$ js2sh -f TITLE example.json
+GLOSSARY_TITLE="example glossary"
+GLOSSARY_GLOSSDIV_TITLE="S"
 ```
