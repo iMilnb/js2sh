@@ -1,4 +1,4 @@
-## JSON to shell variable converter
+## JSON to shell variables converter
 
 `js2sh` is a simple tool to convert _JSON_ data to shell variables.
 
