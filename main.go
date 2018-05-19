@@ -75,6 +75,8 @@ func varType(prev string, v interface{}) bool {
 		filterOut(fmt.Sprintf(fmtstr, doUp(prev), num))
 	case string:
 		filterOut(fmt.Sprintf("%s=\"%s\"\n", doUp(prev), v.(string)))
+	case bool:
+		filterOut(fmt.Sprintf("%s=\"%t\"\n", doUp(prev), v.(bool)))
 	default:
 		return false
 	}
