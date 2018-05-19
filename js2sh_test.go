@@ -17,58 +17,47 @@ func mkMap() map[string]interface{} {
 	return testMap
 }
 
-func TestVarDefault(t *testing.T) {
+func doTest(t *testing.T, msg string) {
 	testMap := mkMap()
 
 	if varType("", testMap) == false {
-		t.Errorf("%v conversion failed", testMap)
+		t.Errorf("%v conversion failed (%s)", testMap, msg)
 	}
 }
 
-func TestVarNoup(t *testing.T) {
-	testMap := mkMap()
+func TestVarDefault(t *testing.T) {
+	doTest(t, "default")
+}
 
+func TestVarNoup(t *testing.T) {
 	*noup = true
 
-	if varType("", testMap) == false {
-		t.Errorf("%v conversion failed with noup", testMap)
-	}
+	doTest(t, "noup")
 
 	*noup = false
 }
 
 func TestVarSeparator(t *testing.T) {
-	testMap := mkMap()
-
 	*separator = "/"
 
-	if varType("", testMap) == false {
-		t.Errorf("%v conversion failed with separator", testMap)
-	}
+	doTest(t, "separator")
 
 	*separator = "_"
 }
 
 func TestVarFilter(t *testing.T) {
-	testMap := mkMap()
 
 	*filter = "KEY"
 
-	if varType("", testMap) == false {
-		t.Errorf("%v conversion failed with filter", testMap)
-	}
+	doTest(t, "filter")
 
 	*filter = ""
 }
 
 func TestVarAll(t *testing.T) {
-	testMap := mkMap()
-
 	*noup = true
 	*separator = "/"
 	*filter = "key"
 
-	if varType("", testMap) == false {
-		t.Errorf("%v conversion failed with all flags", testMap)
-	}
+	doTest(t, "all flags")
 }
