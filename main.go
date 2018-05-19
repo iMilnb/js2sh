@@ -58,7 +58,7 @@ func filterOut(str string) {
 	}
 }
 
-func varType(prev string, v interface{}) {
+func varType(prev string, v interface{}) bool {
 
 	switch v.(type) {
 	case map[string]interface{}:
@@ -75,7 +75,11 @@ func varType(prev string, v interface{}) {
 		filterOut(fmt.Sprintf(fmtstr, doUp(prev), num))
 	case string:
 		filterOut(fmt.Sprintf("%s=\"%s\"\n", doUp(prev), v.(string)))
+	default:
+		return false
 	}
+
+	return true
 }
 
 func main() {
@@ -105,5 +109,7 @@ func main() {
 		panic(err)
 	}
 
-	varType("", f)
+	if varType("", f) != true {
+		os.Exit(1)
+	}
 }
