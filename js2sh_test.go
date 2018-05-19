@@ -6,7 +6,7 @@ import (
 )
 
 func mkMap() map[string]interface{} {
-	testJSON := []byte(`{"key1": "val1", "key2": [1, 2, {"kink2": [3, 4]}]}`)
+	testJSON := []byte(`{"k1": "v1", "k2": [1, true, {"kink2": [3, 4]}]}`)
 
 	testMap := make(map[string]interface{})
 
@@ -47,7 +47,7 @@ func TestVarSeparator(t *testing.T) {
 
 func TestVarFilter(t *testing.T) {
 
-	*filter = "KEY"
+	*filter = "K1"
 
 	doTest(t, "filter")
 
@@ -57,7 +57,7 @@ func TestVarFilter(t *testing.T) {
 func TestVarAll(t *testing.T) {
 	*noup = true
 	*separator = "/"
-	*filter = "key"
+	*filter = "k2"
 
 	doTest(t, "all flags")
 }
