@@ -9,7 +9,7 @@ env:
     - VERSION=$(cat VERSION)
     - OSVER=$(uname -s|tr '[:upper:]' '[:lower:]')
     - ARCH=$(uname -m)
-    - PROJ=$(basename $(pwd))
+    - PROJ=$(basename `pwd`)
     - AOUT=${PROJ}-${VERSION}-${OSVER}-${ARCH}
 
 go:
