@@ -7,6 +7,10 @@ os:
 env:
   global:
     - VERSION=$(cat VERSION)
+    - OSVER=$(uname -s|tr '[:upper:]' '[:lower:]')
+    - ARCH=$(uname -m)
+    - PROJ=$(basename $(pwd))
+    - AOUT=${PROJ}-${VERSION}-${OSVER}-${ARCH}
 
 go:
 - 1.9.x
@@ -14,15 +18,17 @@ go:
 
 script:
 - go test -v ./...
-- go build -v -o js2sh-${VERSION}-$(uname -s)-$(uname -m)
+- go build -v -o ${AOUT}
 
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
+    # This encrypted string is the result of the
+    # `travis encrypt ${GITHUB_TOKEN}` command, where `${GITHUB_TOKEN}`
+    # is a token generated at # https://github.com/settings/tokens/new
     secure: "zqMTR52PFxlOGUVzBI2yZSa5744eGfmpqw3Ek1lRziEXlBv0FfA3TDuY2U/J7R5hgXZgW5j+4FGFG3+3HdqkQ3mefn8LT7xsLQgqwy3k3Dio0y2eU6qVUEQJuvVymhqgc8fdGjeTGQXTnh+EwkkjiXCqPQRfEHKok7XuG8OPrkjyZruAVXMuBDibO7eWhr3K7Pta5IW7VAO9HtwBWqvoZoyfuQGu23Rf7ch0HBuULJY3CvXqxH93n1McWWJjXgEQ/nLDvC0YLXOclBt1hiFgW3ehYtMhdHaJO9uE6tYxJAs416P6k4meeg05jClqj6PXoqjAplMXe0gmzAhiFxNdOkaoRRhWUvEThOHPYS0wHCp3EQh6sZ5Xf68G12clEE46UuFQdq07RY8MLKl7rAsyKo2u+d75hg73tlbnRBj9idwib+SaRxB9WyHKd0a/XLEOzVA5G9Y+8kflR1ohEQ8QQb1M+VFNQ8q+mZzRYfRmAl5ybvxfADPad80qPlaYeBMUO1oDct5l6gQe0fy9tomy0SeqxqCU1GAGfdXWnIDsNTlOH7SUpAygYtCZKXjrAXZFAgB+1skjBe6lcHYlE9LWhezxCKgTz9lqGVLYyhMcfJQ25UbEejZEF+QhRtneucCqusNPNW3Af0ec5iaZdjdKoKWR7GojiLfI22cLJrMBhCc="
-  file_glob: true
-  file: ${TRAVIS_BUILD_DIR}/js2sh-${VERSION}-*
+  file: ${TRAVIS_BUILD_DIR}/${AOUT}
   overwrite: true
   on:
     tags: true
