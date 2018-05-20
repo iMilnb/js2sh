@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/iMilnb/js2sh.svg?branch=master)](https://travis-ci.org/iMilnb/js2sh)
+[![Go Report Card](https://goreportcard.com/badge/github.com/iMilnb/js2sh)](https://goreportcard.com/report/github.com/iMilnb/js2sh)
+
+
 ## JSON to shell variables converter
 
 `js2sh` is a simple tool to convert _JSON_ data to shell variables.
