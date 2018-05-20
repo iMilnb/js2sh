@@ -7,12 +7,12 @@
 Piping content to `js2sh`
 
 ```
-$ echo '{"foo": [1, 2, 3, 8.923878], "bar": {"baz": {"a": "b"}}}' | js2sh
+$ echo '{"foo": [1, 2, true, 8.923878], "bar": {"baz": {"a": "b"}}}' | js2sh
+BAR_BAZ_A="b"
 FOO_0="1"
 FOO_1="2"
-FOO_2="3"
+FOO_2="true"
 FOO_3="8.923878"
-BAR_BAZ_A="b"
 ```
 
 Passing a _JSON_ file
