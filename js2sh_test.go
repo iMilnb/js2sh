@@ -6,7 +6,7 @@ import (
 )
 
 func mkMap() map[string]interface{} {
-	testJSON := []byte(`{"k1": "v1", "k2": [1, true, {"kink2": [3, 4]}]}`)
+	testJSON := []byte(`{"k1": "v1", "k2": [1, true, {"kink2": [null]}]}`)
 
 	testMap := make(map[string]interface{})
 
