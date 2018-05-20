@@ -16,3 +16,10 @@ go:
 script:
 - go test -v ./...
 - go build -v -o ${AOUT}
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: "a6OjTl6uU+/Z1OxdMyNTCch8dPB5Mk48Q6klikFQ54J5Ivl9rjumgmeIKRZol6Bvj9ViYOYLJS35w9crPxDPkt0yfqovrbcSK/19UUeS3H5STCuV6LI7KdokENd2NfPQq09mBSE+WRRMHD+D5SfpH1+ATNV7noLuB2qb/FaILXneYSqhA5eDVuob58yEqIkjPVPE2GjD8ynCe287dtz3sa/IPegQ0W9JM+CV02EXVuPu7exsIrio0z8wEHyhoQCLhIQrI0w2jODBVRBUPV0aJ1owErsqjFjCLVnn1K9v4/tAhbRxgBCA1bhS6AyJQz2o5xljn4rqbhNjaLryhbZI5+5Cp8B2E7/3D4rFl3LdL7awwnfvA7RTKVtDFznUb7Fh3oUSFjvP1HylzmAiDRiofK6n60lgGOzXua2xjcZLy4DECAaoZeIcZzTs6hdC7z++7J5aBtgML4uRepIsQS0Lh2UTzZZPAYIVbVs3HsXx6Uufi96N2T9pZLEVx4peyIwRAilFrf41LU37+NPIUuKtziPyr7fwempRHDQbZYk6PVohWvpV7DpKd0u7pcdLqUyXwttRR04thtXg1bppuqG1X4bZJ/kGhkbaNKq7r/lYZAzjUHXuae0jSUrtmeH65ncBxn1thd+6jH/ATK4Y/BiH1yIHivJNKQQBOyg9sqBVEpk="
+  file: ${TRAVIS_BUILD_DIR}/${AOUT}
