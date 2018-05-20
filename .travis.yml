@@ -1,14 +1,25 @@
 language: go
 
 os:
-  - linux
-  - netbsd
-  - osx
+- linux
+- netbsd
+- osx
+
+env:
+  global:
+    - AOUT="js2sh-${GOOS}-${GOARCH}"
 
 go:
-  - "1.9.x"
-  - "1.10.x"
+- 1.9.x
+- 1.10.x
 
 script:
-  - go test -v ./...
-  - make
+- go test -v ./...
+- go build -v -o ${AOUT}
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: rN5YXSUB8TqFwOSKspngGxdqx9tg4rARP8BCRjDOCEdLVWjZ3/l+HyTtiQDw0HWL6XE0L1IkUr9Ibkhu4Q5kHF8niH798eGwuU+00dPmiG4jhRVxDfx1UCs2Wa0/rDZEjHh4GzJFC0UMC9KAHqnjDyPMHZZyOTLF4tZqfeVBfKEWA7m0ktrimLoB6Yg9ZOKnd5tgoLIwVNxpoXzNW1eTnZqz9fBWiSsSvxqbyJIRxBh+l0GOcAjxSsz9hpr1rV47HUXB24/zkm6WSY2SKqTDZW+sOmG7LcffRFJvQxMLHXtEEI4rsTAXPsZGOmVJwT0lnBhfPiexzYAvnHQ0JnsE+aOhX4h0Rfu8wVB0LT5bQMrfueOhiKfBE1aLUOjEBXXANZIvIv7L8tZO0IV2jdUikLjGULOm7YYZ6DyhpRTceo0zGc1MutNRoOsLB9k5SH56KZi2cM7DhBFpi3yFDUdrZoBII9JRP12NvyYYaWceCeNXKvgckKf3HxL53LgcTBux3FPIDVOS/bbMDw7TLZD5YnqRYdhJHBDaTL7YCY98i896yAJiqpgm7d1J7/LnAI0nY9UgUkfZoQbwXVsaffWIB6VaG6KQxW3zNdv8O4YvaggqJq+jIzv9hreq2XDVNJKaHbZEimI1ta+WWaqWI6uBqBzeX4CiBX6N2+LmkgbUiGM=
+  file: ${TRAVIS_BUILD_DIR}/${AOUT}
