@@ -63,11 +63,15 @@ func varType(prev string, v interface{}) bool {
 	switch v.(type) {
 	case map[string]interface{}:
 		for key, val := range v.(map[string]interface{}) {
-			varType(hasPrev(prev)+key, val)
+			if !varType(hasPrev(prev)+key, val) {
+				return false
+			}
 		}
 	case []interface{}:
 		for i, v := range v.([]interface{}) {
-			varType(hasPrev(prev)+strconv.Itoa(i), v)
+			if !varType(hasPrev(prev)+strconv.Itoa(i), v) {
+				return false
+			}
 		}
 	case float64:
 		num := v.(float64)
@@ -113,7 +117,8 @@ func main() {
 		panic(err)
 	}
 
-	if varType("", f) != true {
+	if !varType("", f) {
+		fmt.Fprintln(os.Stderr, "unsupported JSON object")
 		os.Exit(1)
 	}
 }
