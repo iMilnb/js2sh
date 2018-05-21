@@ -326,11 +326,12 @@ You should also get your employer (if you work as a programmer) or your
 school, if any, to sign a "copyright disclaimer" for the program, if
 necessary.  Here is a sample; alter the names:
 
-  Yoyodyne, Inc., hereby disclaims all copyright interest in the program
-  `Gnomovision' (which makes passes at compilers) written by James Hacker.
+  Emile `iMil' Heitor, hereby disclaims all copyright interest in the program
+  `js2sh' (which converts JSON to shell variables) written by Emile `iMil'
+  Heitor.
 
-  <signature of Ty Coon>, 1 April 1989
-  Ty Coon, President of Vice
+  93A8 ED45 6F88 8A4A 80B3  ECE2 48A0 07E9 B35E 9F9D, May 21th, 2018
+  Emile `iMil' Heitor
 
 This General Public License does not permit incorporating your program into
 proprietary programs.  If your program is a subroutine library, you may
