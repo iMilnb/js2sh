@@ -5,8 +5,10 @@ import (
 	"testing"
 )
 
+const jsExample = `{"k1": "v1", "k2": [1, true, {"kink2": [null]}]}`
+
 func mkMap() map[string]interface{} {
-	testJSON := []byte(`{"k1": "v1", "k2": [1, true, {"kink2": [null]}]}`)
+	testJSON := []byte(jsExample)
 
 	testMap := make(map[string]interface{})
 
